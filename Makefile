@@ -4,6 +4,12 @@ dev:
 	zola serve -i 0.0.0.0 -u localhost -p 3000 &
 	tailwindcss -i ./input.css -o ./static/output.css --watch
 
+build:
+	mkdir -p ./static
+	typst compile ./cv.typ ./static/cv.pdf
+	tailwindcss -i ./input.css -o ./static/output.css --minify
+	zola build
+
 deploy:
 	@if ! command -v typst >/dev/null 2>&1; then \
 		mkdir -p "$$HOME/.local/bin"; \
