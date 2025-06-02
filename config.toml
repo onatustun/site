@@ -1,0 +1,14 @@
+base_url = "https://onatustun.com"
+title = "onatustun"
+description = "personal site"
+default_language = "en"
+output_dir = "public"
+compile_sass = false
+minify_html = true
+build_search_index = false
+generate_feeds = false
+
+[markdown]
+highlight_code = false
+
+[extra]

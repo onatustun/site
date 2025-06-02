@@ -1,0 +1,33 @@
+{%if section %}
+  {% set title = section.title %}
+{% else %}
+  {% set title = page.title %}
+{% endif %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}{{ title }}{% endblock title %}</title>
+
+    {% block css %}
+    <link rel="stylesheet" href="{{ get_url(path="output.css") }}">
+    {% endblock css %}
+
+    {% block meta %}
+    <meta name="description" content="{{ config.description }}" />
+    <meta namne="language" content="English" />
+    <meta property="og:description" content="{{ config.description }}" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:site_name" content="{{ config.title }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ current_url }}" />
+    {% endblock meta %}
+  </head>
+
+  <body class="font-sans antialised min-h-screen max-w-full overflow-x-hidden flex justify-center items-center">
+  {% block content %} {% endblock content %}
+  </body>
+</html>

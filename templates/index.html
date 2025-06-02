@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="flex flex-col w-full p-6 mb-12 max-w-md aspect-[1.75/1]">
+    <h1 class="text-5xl">{{ config.title }}</h1>
+
+    <nav class="flex gap-2 text-xl">
+    {% for link in section.extra.links %}
+      <a class="underline" href="{{ link.path }}">{{ link.name }}</a>
+    {% endfor %}
+    </nav>
+  </div>
+{% endblock content %}

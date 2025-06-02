@@ -1,0 +1,6 @@
+[build]
+publish = "public"
+command = "make deploy"
+
+[build.environment]
+ZOLA_VERSION = "0.20.0"
