@@ -1,5 +1,5 @@
 +++
-title = "onatustun"
+title = "Onat Üstün"
 template = "index.html"
 
 [extra]

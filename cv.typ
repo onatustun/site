@@ -1,5 +1,3 @@
-#show heading: set text(font: "Linux Biolinum")
-
 #show link: underline
 
 #set page(
@@ -31,7 +29,7 @@
 = Onat Ustun
 
 onat\@ustun.uk |
-#link("https://github.com/onatustun")[github.com/onatustun] | #link("https://onatustun.com")[onatustun.com]
+#link("https://github.com/onatustun")[github.com/onatustun] | #link("https://ust.sh")[ust.sh]
 
 == Education
 #chiline()

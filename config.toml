@@ -1,6 +1,6 @@
-base_url = "https://onatustun.com"
-title = "onatustun"
-description = "personal site"
+base_url = "https://ust.sh"
+title = "Onat Üstün"
+description = "site"
 default_language = "en"
 output_dir = "public"
 compile_sass = false

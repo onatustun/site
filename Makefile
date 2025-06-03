@@ -1,4 +1,4 @@
-.PHONY: dev deploy clean
+.PHONY: dev build deploy clean
 
 dev:
 	zola serve -i 0.0.0.0 -u localhost -p 3000 &
