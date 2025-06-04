@@ -1,70 +1,115 @@
 #show link: underline
 
-#set page(margin: (x: 0.9cm, y: 1.3cm))
-#set par(justify: true)
-#let chiline() = { v(-3pt); line(length: 100%); v(-5pt) }
+#set page(
+  margin: (x: 1.5cm, y: 1.5cm),
+)
+#set par(justify: true, leading: 0.6em)
 
-#let continuescvpage() = {
-  place(
-    bottom + center,
-    dx: 0pt,
-    dy: -10pt,
-    float: true,
-    scope: "parent",
+#let section-line() = {
+  v(-0.2em)
+  line(length: 100%, stroke: 0.8pt + gray.darken(10%))
+  v(0.6em)
+}
+
+#let resume-entry(
+  title: none,
+  organization: none,
+  dates: none,
+  body: [],
+) = {
+  grid(
+    columns: (1fr, auto),
+    column-gutter: 0pt,
+    align: (top, right),
     [
-      #text(fill: gray)
-    ]
+      #text(weight: 700)[#title]
+      #if organization != none [
+        \ #organization
+      ]
+    ],
+    [
+      #text(fill: gray.darken(20%))[#dates]
+    ],
   )
+  v(0.2em)
+  set par(leading: 0.4em)
+  body
+  v(0.8em)
 }
 
 = Onat Ustun
 
 #grid(
-  columns: (auto, 1fr), 
-  column-gutter: 0pt,   
-  align: (top, right),  
-    
+  columns: (1fr, auto),
+  column-gutter: 0pt,
+  align: (top, right),
   [
     College Student \
     Aberdeen, United Kingdom \
-    Last Updated On 3 Jun 2025
+    #text(size: 0.85em, fill: gray.darken(20%))[Last Updated: 3 Jun 2025]
   ],
   [
-    #link("mailto:o@ust.sh")[email] \
-    #link("https://github.com/onatustun")[github] \
-    #link("https://ust.sh")[website] \
+    #link("mailto:onatustun@gmail.com")[onatustun\@gmail.com] \
+    #link("https://github.com/onatustun")[github.com/onatustun] \
+    #link("https://ust.sh")[ust.sh]
   ],
 )
 
+#v(0.8em)
+
 == Education
-#chiline()
+#section-line()
 
-*#lorem(2)* #h(1fr) xx/xx -- xx/xx \
-#lorem(5) \
-- #lorem(10)
+#resume-entry(
+  title: "HND Web Development (including Digital Design & Development)",
+  organization: "North East Scotland College (NESCol)",
+  dates: "Aug 2023 – Present",
+  body: list(
+    [Developed a responsive e-commerce platform using React and NodeJS, showcasing proficiency in full-stack development.],
+    [Collaborated on various team projects incl a airport booking app, applying Agile methodologies and version control with Git.], 
+    [Made bitmap and vector graphics with Adobe Photoshop and Illustrator and implemented them in sites and figma designs following HCI principles.],
+  )
+)
 
-*NESCol* #h(1fr) 08/23 -- Present \
-HND in Web Development \
-- #lorem(10)
+// #resume-entry(
+//   title: lorem(5),
+//   organization: lorem(5),
+//   dates: "Jan 20xx – Jan 20xx",
+//   body: list(
+//     lorem(12),
+//     lorem(12),
+//   )
+// )
 
-== Experience
-#chiline()
+// == Experience
+// #section-line()
 
-*#lorem(2)* #h(1fr) xx/xx -- xx/xx \
-#lorem(5) \
-- #lorem(10)
+// #resume-entry(
+//   title: lorem(5),
+//   organization: lorem(5),
+//   dates: "Jan 20xx – Jan 20xx",
+//   body: list(
+//     lorem(12),
+//     lorem(12),
+//   )
+// )
 
 == Projects
-#chiline()
+#section-line()
 
-#link("https://github.com/onatustun")[*#lorem(2)*] #h(1fr) xx/xx -- xx/xx \
-#lorem(5) \
-- #lorem(15)
-- #lorem(15)
-- #lorem(15)
+#resume-entry(
+  title: [#link("https://github.com/onatustun/all-season-sauna")[All Season Sauna Website]],
+  organization: none,
+  dates: "Jan 2025",
+  body: list(
+    [College assignment to go out and look for a client and build them a website.],
+    [Made with React, Nextjs, Typescript, and TailwindCSS.],
+    [Produced edits to imagery and made a logo.],
+  )
+)
 
 == Technical Skills
-#chiline()
+#section-line()
 
 #let skills = (
   "Programming Languages": (
@@ -100,6 +145,9 @@ HND in Web Development \
     "Vim",
     "Helix",
     "Visual Studio Code",
+    "Adobe Suite",
+    "Photoshop",
+    "Illustrator",
   ),
   "Operating Systems": (
     "NixOS",
@@ -110,5 +158,6 @@ HND in Web Development \
 )
 
 #for (category, items) in skills [
-  - #text[*#category:*] #items.join(", ")
+  #set par(leading: 0.4em) 
+  - #text(weight: 700)[#category:] #items.join(", ")
 ]
