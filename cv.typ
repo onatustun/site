@@ -49,7 +49,7 @@
     #text(size: 0.85em, fill: gray.darken(20%))[Last Updated: 3 Jun 2025]
   ],
   [
-    #link("mailto:onatustun@gmail.com")[onatustun\@gmail.com] \
+    #link("mailto:o@ust.sh")[o\@ust.sh] \
     #link("https://github.com/onatustun")[github.com/onatustun] \
     #link("https://ust.sh")[ust.sh]
   ],
