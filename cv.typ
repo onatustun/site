@@ -39,21 +39,25 @@
 == Education
 #chiline()
 
-*#lorem(2)* #h(1fr) 2333/23 -- 2333/23 \
+*#lorem(2)* #h(1fr) xx/xx -- xx/xx \
 #lorem(5) \
+- #lorem(10)
+
+*NESCol* #h(1fr) 08/23 -- Present \
+HND in Web Development \
 - #lorem(10)
 
 == Experience
 #chiline()
 
-*#lorem(2)* #h(1fr) 2333/23 -- 2333/23 \
+*#lorem(2)* #h(1fr) xx/xx -- xx/xx \
 #lorem(5) \
 - #lorem(10)
 
 == Projects
 #chiline()
 
-#link("https://github.com/onatustun")[*#lorem(2)*] #h(1fr) 2333/23 -- 2333/23 \
+#link("https://github.com/onatustun")[*#lorem(2)*] #h(1fr) xx/xx -- xx/xx \
 #lorem(5) \
 - #lorem(15)
 - #lorem(15)
