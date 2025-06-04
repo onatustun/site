@@ -157,6 +157,22 @@
     "Arch Linux",
     "Ubuntu",
   ),
+  "Methods": (
+    "Agile (Scrum)",
+    "Waterfall",
+    "Object-Oriented Programming",
+    "Functional Programming",
+    "Asynchronous Programming",
+    "Event-Driven Programming",
+    "Declarative Programming",
+    "Test-Driven Development",
+    "Concurrency",
+    "Procedural Programming",
+    "Debugging",
+    "CI/CD",
+    "Version Control",
+    "API Integration",
+  ),
 )
 
 #for (category, items) in skills [
