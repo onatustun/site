@@ -31,31 +31,120 @@
         ];
       };
 
-      packages.default = pkgs.stdenv.mkDerivation {
-        pname = "site";
-        version = "0.1.0";
-        src = lib.cleanSource ./.;
+      packages = {
+        default = pkgs.stdenv.mkDerivation {
+          pname = "site";
+          version = "0.1.0";
+          src = lib.cleanSource ./.;
+          doCheck = true;
+          dontInstall = true;
 
-        nativeBuildInputs = with pkgs; [
-          nodejs
-          tailwindcss
-          typst
-          zola
-        ];
+          nativeBuildInputs = with pkgs; [
+            nodejs
+            tailwindcss
+            typst
+            zola
+          ];
 
-        checkPhase = ''
-          zola check
-        '';
+          configurePhase = ''
+            runHook preConfigure
 
-        buildPhase = ''
-          mkdir -p ./static
-          typst compile ./cv.typ ./static/cv.pdf
-          tailwindcss -i ./input.css -o ./static/output.css --minify
-          zola build --output-dir $out --force
-        '';
+            mkdir -p static
 
-        dontInstall = true;
+            runHook postConfigure
+          '';
+
+          buildPhase = ''
+            runHook preBuild
+        
+            typst compile ./cv.typ ./static/cv.pdf
+            tailwindcss -i ./input.css -o ./static/output.css --minify
+            zola build --output-dir $out --force
+
+            runHook postBuild
+          '';
+
+          checkPhase = ''
+            runHook preCheck
+          
+            zola check
+
+            runHook postCheck
+          '';
+
+
+          meta = with lib; {
+            description = "personal website";
+            homepage = "https://ust.sh";
+            license = licenses.mit;
+            platforms = platforms.unix;
+          };        
+        };
+
+        cv = pkgs.stdenv.mkDerivation {
+          pname = "cv";
+          version = "0.1.0";
+          src = lib.cleanSource ./.;
+
+          nativeBuildInputs = with pkgs; [
+            typst
+          ];
+
+          buildPhase = ''
+            mkdir -p $out
+            typst compile ./cv.typ $out/cv.pdf
+          '';
+
+          dontInstall = true;
+        };        
       };
+
+
+      apps = {
+        dev = {
+          type = "app";
+          program = "${pkgs.writeShellScript "dev" ''
+            set -e          
+            mkdir -p ./static
+            
+            cleanup() {
+              jobs -p | xargs -r kill
+              exit 0
+            }
+
+            trap cleanup INT TERM
+            ${pkgs.zola}/bin/zola serve -i 0.0.0.0 -u localhost -p 3000 &
+            ${pkgs.typst}/bin/typst watch ./cv.typ ./static/cv.pdf &
+            ${pkgs.tailwindcss}/bin/tailwindcss \
+              -i ./input.css \
+              -o ./static/output.css \
+              --watch &
+            
+            wait
+          ''}";
+        };
+
+        clean = {
+          type = "app";
+          program = "${pkgs.writeShellScript "clean" ''
+            rm -rf public/
+            rm -rf static/cv.pdf
+            rm -rf static/output.css
+            rm -rf target/
+          ''}";
+        };
+        
+        purge = {
+          type = "app";
+          program = "${pkgs.writeShellScript "purge" ''
+            rm -rf node_modules/
+            rm -rf public/
+            rm -rf static/cv.pdf
+            rm -rf static/output.css
+            rm -rf target/
+          ''}";
+        };
+      };      
     };
   };
 }
