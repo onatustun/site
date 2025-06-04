@@ -46,7 +46,7 @@
   [
     College Student \
     Aberdeen, United Kingdom \
-    #text(size: 0.85em, fill: gray.darken(20%))[Last Updated: 3 Jun 2025]
+    #text(size: 0.85em, fill: gray.darken(20%))[Last Updated: 4 Jun 2025]
   ],
   [
     #link("mailto:o@ust.sh")[o\@ust.sh] \
@@ -93,20 +93,6 @@
 //     lorem(12),
 //   )
 // )
-
-== Projects
-#section-line()
-
-#resume-entry(
-  title: [#link("https://github.com/onatustun/all-season-sauna")[All Season Sauna Website]],
-  organization: none,
-  dates: "Jan 2025",
-  body: list(
-    [College assignment to go out and look for a client and build them a website.],
-    [Made with React, Nextjs, Typescript, and TailwindCSS.],
-    [Produced edits to imagery and made a logo.],
-  )
-)
 
 == Technical Skills
 #section-line()
@@ -179,3 +165,17 @@
   #set par(leading: 0.4em) 
   - #text(weight: 700)[#category:] #items.join(", ")
 ]
+
+== Projects
+#section-line()
+
+#resume-entry(
+  title: [#link("https://github.com/onatustun/all-season-sauna")[All Season Sauna Website]],
+  organization: none,
+  dates: "Jan 2025",
+  body: list(
+    [College assignment to go out and look for a client and build them a website.],
+    [Made with React, Nextjs, Typescript, and TailwindCSS.],
+    [Produced edits to imagery and made a logo.],
+  )
+)
