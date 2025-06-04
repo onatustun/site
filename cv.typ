@@ -138,6 +138,8 @@
     "Git",
     "GitHub",
     "GitHub Actions",
+    "Linux",
+    "Unix",
     "Netlify",
     "Vercel",
     "npm",
