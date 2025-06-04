@@ -1,5 +1,5 @@
 base_url = "https://ust.sh"
-title = "Onat Üstün"
+title = "ust"
 description = "site"
 default_language = "en"
 output_dir = "public"
@@ -12,3 +12,4 @@ generate_feeds = false
 highlight_code = false
 
 [extra]
+name = "onatustun"

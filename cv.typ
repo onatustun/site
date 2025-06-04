@@ -1,12 +1,7 @@
 #show link: underline
 
-#set page(
-  margin: (x: 0.9cm, y: 1.3cm),
-)
-
-
+#set page(margin: (x: 0.9cm, y: 1.3cm))
 #set par(justify: true)
-
 #let chiline() = { v(-3pt); line(length: 100%); v(-5pt) }
 
 #let continuescvpage() = {
@@ -22,45 +17,93 @@
   )
 }
 
-#let lastupdated(date) = {
-  h(1fr); text("Last Updated in " + date, fill: color.gray)
-}
-
 = Onat Ustun
 
-onat\@ustun.uk |
-#link("https://github.com/onatustun")[github.com/onatustun] | #link("https://ust.sh")[ust.sh]
+#grid(
+  columns: (auto, 1fr), 
+  column-gutter: 0pt,   
+  align: (top, right),  
+    
+  [
+    College Student \
+    Aberdeen, United Kingdom \
+    Last Updated On 3 Jun 2025
+  ],
+  [
+    #link("mailto:o@ust.sh")[email] \
+    #link("https://github.com/onatustun")[github] \
+    #link("https://ust.sh")[website] \
+  ],
+)
 
 == Education
 #chiline()
 
-#link("https://typst.app/")[*#lorem(2)*] #h(1fr) 2333/23 -- 2333/23 \
-#lorem(5) #h(1fr) #lorem(2) \
+*#lorem(2)* #h(1fr) 2333/23 -- 2333/23 \
+#lorem(5) \
 - #lorem(10)
 
+== Experience
+#chiline()
+
 *#lorem(2)* #h(1fr) 2333/23 -- 2333/23 \
-#lorem(5) #h(1fr) #lorem(2) \
+#lorem(5) \
 - #lorem(10)
 
 == Projects
 #chiline()
 
-*#lorem(2)* #h(1fr) 2333/23 -- 2333/23 \
-#lorem(5) #h(1fr) #lorem(2) \
-- #lorem(20)
-- #lorem(30)
-- #lorem(40)
-
-*#lorem(2)* #h(1fr) 2333/23 -- 2333/23 \
-#lorem(5) #h(1fr) #lorem(2) \
-- #lorem(20)
-- #lorem(30)
-- #lorem(40)
+#link("https://github.com/onatustun")[*#lorem(2)*] #h(1fr) 2333/23 -- 2333/23 \
+#lorem(5) \
+- #lorem(15)
+- #lorem(15)
+- #lorem(15)
 
 == Technical Skills
 #chiline()
 
-#lorem(5) #h(1fr) #lorem(2) \
-- #lorem(20)
+#let skills = (
+  "Programming Languages": (
+    "JavaScript",
+    "TypeScript",
+    "Python",
+    "Java",
+    "C#",
+    "Rust",
+    "Nix",
+    "Typst",
+  ),
+  "Web Technologies": (
+    "HTML",
+    "CSS",
+    "React",
+    "NodeJS",
+    "NextJS",
+    "TailwindCSS",
+    "Zola",
+    "Astro",
+    "shadcn/ui",
+  ),
+  "Tools & Platforms": (
+    "Git",
+    "GitHub",
+    "GitHub Actions",
+    "Netlify",
+    "Vercel",
+    "npm",
+    "Figma",
+    "Vim",
+    "Helix",
+    "Visual Studio Code",
+  ),
+  "Operating Systems": (
+    "NixOS",
+    "Windows",
+    "Arch Linux",
+    "Ubuntu",
+  ),
+)
 
-#lastupdated("Mar 22, 2025")
+#for (category, items) in skills [
+  - #text[*#category:*] #items.join(", ")
+]
