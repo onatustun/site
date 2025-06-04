@@ -80,12 +80,13 @@ HND in Web Development \
   "Web Technologies": (
     "HTML",
     "CSS",
+    "TailwindCSS",
     "React",
     "NodeJS",
     "NextJS",
-    "TailwindCSS",
     "Zola",
     "Astro",
+    "jQuery",
     "shadcn/ui",
   ),
   "Tools & Platforms": (
