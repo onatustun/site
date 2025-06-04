@@ -72,7 +72,6 @@
             runHook postCheck
           '';
 
-
           meta = with lib; {
             description = "personal website";
             homepage = "https://ust.sh";
