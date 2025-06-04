@@ -98,7 +98,6 @@
         };        
       };
 
-
       apps = {
         dev = {
           type = "app";
