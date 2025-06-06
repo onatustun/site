@@ -1,6 +1,6 @@
 base_url = "https://ust.sh"
-title = "ust.sh"
-description = "site"
+title = "ust"
+description = "personal website"
 default_language = "en"
 output_dir = "public"
 compile_sass = false
@@ -12,4 +12,11 @@ generate_feeds = false
 highlight_code = false
 
 [extra]
-name = "onat ustun"
+author = "onat ustun"
+
+links = [
+  # { name = "cv", path = "/cv.pdf"  },
+  { name = "email", path = "mailto:o@ust.sh"  },
+  { name = "github", path = "https://github.com/onatustun" },
+  { name = "x", path = "https://x.com/fshshsi" },
+]

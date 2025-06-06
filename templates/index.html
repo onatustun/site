@@ -3,11 +3,11 @@
 {% block content %}
   <div class="flex flex-col w-full p-6 mb-12 max-w-md aspect-[1.75/1]">
     <h1 class="text-5xl tracking-tight">
-      {{ config.extra.name }}
+      {{ config.extra.author }}
     </h1>
 
     <nav class="flex gap-x-2">
-    {% for link in section.extra.links %}
+    {% for link in config.extra.links %}
       <a class="text-xl tracking-wide underline underline-offset-2" href="{{ link.path }}">
         {{ link.name }}
       </a>
