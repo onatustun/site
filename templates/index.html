@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="flex flex-col w-full p-6 mb-12 max-w-md aspect-[1.75/1]">
-    <h1 class="text-5xl tracking-tight">
+  <div class="w-full flex flex-col gap-y-2 p-6 mb-12 max-w-md aspect-[1.75/1]">
+    <h1 class="w-min text-5xl/10 tracking-tight text-nowrap">
       {{ config.extra.author }}
     </h1>
 
-    <nav class="flex gap-x-2">
+    <nav class="w-min flex gap-x-2">
     {% for link in config.extra.links %}
-      <a class="text-xl tracking-wide underline underline-offset-2" href="{{ link.path }}">
+      <a class="text-xl/4 tracking-wide underline underline-offset-2" href="{{ link.path }}">
         {{ link.name }}
       </a>
     {% endfor %}

@@ -5,7 +5,7 @@
 {% endif %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="m-0 p-0 h-dvh">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,24 +13,24 @@
 
     <title>{% block title %}{{ title }}{% endblock title %} | {{ config.title }}</title>
 
-    <link rel="apple-touch-icon" sizes="57x57" href="{{ get_url(path='apple-icon-57x57.png') }}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{{ get_url(path='apple-icon-60x60.png') }}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ get_url(path='apple-icon-72x72.png') }}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{ get_url(path='apple-icon-76x76.png') }}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ get_url(path='apple-icon-114x114.png') }}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{ get_url(path='apple-icon-120x120.png') }}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{{ get_url(path='apple-icon-144x144.png') }}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{ get_url(path='apple-icon-152x152.png') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ get_url(path='apple-icon-180x180.png') }}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{{ get_url(path='android-icon-192x192.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ get_url(path='favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{{ get_url(path='favicon-96x96.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ get_url(path='favicon-16x16.png') }}">
-    <link rel="icon" type="image/x-icon" href="{{ get_url(path='favicon.ico') }}" />
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ get_url(path='favicons/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ get_url(path='favicons/apple-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ get_url(path='favicons/apple-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ get_url(path='favicons/apple-icon-76x76.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ get_url(path='favicons/apple-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ get_url(path='favicons/apple-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ get_url(path='favicons/apple-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ get_url(path='favicons/apple-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ get_url(path='favicons/apple-icon-180x180.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ get_url(path='favicons/android-icon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ get_url(path='favicons/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ get_url(path='favicons/favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ get_url(path='favicons/favicon-16x16.png') }}">
+    <link rel="icon" type="image/x-icon" href="{{ get_url(path='favicons/favicon.ico') }}" />
 
-    <link rel="manifest" href="{{ get_url(path='manifest.json') }}">
+    <link rel="manifest" href="{{ get_url(path='favicons/manifest.json') }}">
     <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="{{ get_url(path='ms-icon-144x144.png') }}">
+    <meta name="msapplication-TileImage" content="{{ get_url(path='favicons/ms-icon-144x144.png') }}">
     <meta name="theme-color" content="#ffffff">
 
     <link rel="preload" href="{{ get_url(path='output.css') }}" as="style" />
@@ -39,11 +39,12 @@
 
     <meta name="author" content="{{ config.extra.author }}" />
     <meta name="description" content="{{ config.description }}" />
+    <meta name="generator" content="Zola v0.20.0" />
     <meta name="language" content="English" />
     <meta name="robots" content="index, follow" />
 
     <meta property="og:description" content="{{ config.description }}" />
-    <meta property="og:image" content="{{ get_url(path="tserriednich.png")}}">
+    <meta property="og:image" content="{{ get_url(path="images/tserriednich.png")}}">
     <meta property="og:locale" content="en_GB" />
     <meta property="og:site_name" content="{{ config.title }}" />
     <meta property="og:title" content="{{ title }} | {{ config.title }}" />
@@ -53,7 +54,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:creator" content="@fshshsi">
     <meta name="twitter:description" content="{{ config.description }}">
-    <meta name="twitter:image" content="{{ get_url(path="tserriednich.png")}}">
+    <meta name="twitter:image" content="{{ get_url(path="images/tserriednich.png")}}">
     <meta name="twitter:site" content="@fshshsi">
     <meta name="twitter:title" content="{{ title }} | {{ config.title }}">
     <meta name="twitter:url" content="{{ config.base_url }}">
@@ -73,7 +74,7 @@
     </script>
   </head>
 
-  <body class="font-sans antialised w-screen min-h-screen overflow-x-hidden flex justify-center items-center">
+  <body class="font-sans antialised w-screen min-h-dvh overflow-x-hidden flex justify-center items-center">
   {% block content %} {% endblock content %}
   </body>
 </html>
