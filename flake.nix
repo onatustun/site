@@ -102,23 +102,10 @@
         dev = {
           type = "app";
           program = "${pkgs.writeShellScript "dev" ''
-            set -e          
             mkdir -p ./static
-            
-            cleanup() {
-              jobs -p | xargs -r kill
-              exit 0
-            }
-
-            trap cleanup INT TERM
-            ${pkgs.zola}/bin/zola serve -i 0.0.0.0 -u localhost -p 3000 &
-            ${pkgs.typst}/bin/typst watch ./cv.typ ./static/cv.pdf &
-            ${pkgs.tailwindcss}/bin/tailwindcss \
-              -i ./input.css \
-              -o ./static/output.css \
-              --watch &
-            
-            wait
+            zola serve -i 0.0.0.0 -u localhost -p 3000 &
+            typst watch ./cv.typ ./static/cv.pdf &
+            tailwindcss -i ./input.css -o ./static/output.css --watch
           ''}";
         };
 
