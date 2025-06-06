@@ -56,7 +56,7 @@
 
           buildPhase = ''
             runHook preBuild
-        
+
             typst compile ./cv.typ ./static/cv.pdf
             tailwindcss -i ./input.css -o ./static/output.css --minify
             zola build --output-dir $out --force
