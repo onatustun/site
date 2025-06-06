@@ -65,9 +65,6 @@
   organization: "North East Scotland College (NESCol)",
   dates: "Aug 2023 – Present",
   body: list(
-    [Developed a responsive e-commerce platform using React and NodeJS, showcasing proficiency in full-stack development.],
-    [Collaborated on various team projects incl a airport booking app, applying Agile methodologies and version control with Git.], 
-    [Made bitmap and vector graphics with Adobe Photoshop and Illustrator and implemented them in sites and figma designs following HCI principles.],
   )
 )
 
@@ -169,13 +166,13 @@
 == Projects
 #section-line()
 
-#resume-entry(
-  title: [#link("https://github.com/onatustun/all-season-sauna")[All Season Sauna Website]],
-  organization: none,
-  dates: "Jan 2025",
-  body: list(
-    [College assignment to go out and look for a client and build them a website.],
-    [Made with React, Nextjs, Typescript, and TailwindCSS.],
-    [Produced edits to imagery and made a logo.],
-  )
-)
+// #resume-entry(
+//   title: [#link("https://github.com/onatustun/all-season-sauna")[All Season Sauna Website]],
+//   organization: none,
+//   dates: "Jan 2025",
+//   body: list(
+//     [College assignment to go out and look for a client and build them a website.],
+//     [Made with React, Nextjs, Typescript, and TailwindCSS.],
+//     [Produced edits to imagery and made a logo.],
+//   )
+// )
