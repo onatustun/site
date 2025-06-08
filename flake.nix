@@ -24,6 +24,7 @@
           tailwindcss
           tailwindcss-language-server
           tinymist
+          typescript-language-server
           typst
           typstyle
           vscode-langservers-extracted

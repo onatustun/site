@@ -5,6 +5,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+       'foreground': 'oklch(var(--foreground))',
+       'background': 'oklch(var(--background))',
+      },
+            
       fontFamily: {
         sans: ['Jost', 'sans-serif'],
       },      
