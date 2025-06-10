@@ -4,13 +4,12 @@
 
 @layer base {
   .light {
-    --foreground: 0.4899 0.0102 248.04;
-    --background: 0.9851 0 0;
+    --background: 0.9578 0.0058 264.53;
+    --foreground: 0.4355 0.043 279.33;
   }
 
-  .dark {
-    --foreground: 0.798 0.01 93.6;
-    --background: 0.1884 0.0128 248.51;
+  main a {
+    text-decoration: underline;
   }
 }
 

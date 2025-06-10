@@ -8,6 +8,9 @@ minify_html = true
 build_search_index = false
 generate_feeds = false
 
+[link_checker]
+external_level = "warn"
+
 [markdown]
 highlight_code = false
 

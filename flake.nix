@@ -47,14 +47,6 @@
             zola
           ];
 
-          configurePhase = ''
-            runHook preConfigure
-
-            mkdir -p static
-
-            runHook postConfigure
-          '';
-
           buildPhase = ''
             runHook preBuild
 
@@ -103,7 +95,6 @@
         dev = {
           type = "app";
           program = "${pkgs.writeShellScript "dev" ''
-            mkdir -p ./static
             zola serve -i 0.0.0.0 -u localhost -p 3000 &
             typst watch ./cv.typ ./static/cv.pdf &
             tailwindcss -i ./input.css -o ./static/output.css --watch

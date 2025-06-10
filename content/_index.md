@@ -1,12 +1,10 @@
 +++
 title = "index"
 template = "index.html"
-
-[extra]
-
 +++
+
 a 19-year-old student with a passion for systems programming.
 
-web dev background, yet my current interests are exploring computing fundamentals.
+web dev background, yet my current interests are exploring core computer science concepts.
 
-actively researching & building with <a href="https://nixos.org/" class="underline">nix</a>, <a href="https://www.haskell.org/" class="underline">haskell</a>, and <a href="https://www.rust-lang.org/" class="underline">rust</a>.
+actively researching & building with [nix](https://nixos.org/), [haskell](https://www.haskell.org/), and [rust](https://www.rust-lang.org/).
