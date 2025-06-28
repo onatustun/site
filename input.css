@@ -3,9 +3,16 @@
 @tailwind utilities;
 
 @layer base {
-  .light {
+  :root {
     --background: 0.9578 0.0058 264.53;
     --foreground: 0.4355 0.043 279.33;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: 0.1765 0.0317 217.91;
+      --foreground: 0.774 0.0123 196.9;
+    }
   }
 
   main a {
