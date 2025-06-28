@@ -1,8 +1,6 @@
 #show link: underline
 
-#set page(
-  margin: (x: 1.5cm, y: 1.5cm),
-)
+#set page(margin: (x: 1.5cm, y: 1.5cm))
 #set par(justify: true, leading: 0.6em)
 
 #let section-line() = {
@@ -46,7 +44,7 @@
   [
     College Student \
     Aberdeen, United Kingdom \
-    #text(size: 0.85em, fill: gray.darken(20%))[Last Updated: 4 Jun 2025]
+    #text(size: 0.85em, fill: gray.darken(20%))[Last Updated: 29 Jun 2025]
   ],
   [
     #link("mailto:o@ust.sh")[o\@ust.sh] \
@@ -63,9 +61,8 @@
 #resume-entry(
   title: "HND Web Development (including Digital Design & Development)",
   organization: "North East Scotland College (NESCol)",
-  dates: "Aug 2023 – Present",
-  body: list(
-  )
+  dates: "Aug 2023 – Jul 2025",
+  body: list(),
 )
 
 // #resume-entry(
@@ -102,8 +99,6 @@
     "Java",
     "C#",
     "Rust",
-    "Nix",
-    "Typst",
   ),
   "Web Technologies": (
     "HTML",
@@ -123,6 +118,8 @@
     "GitHub Actions",
     "Linux",
     "Unix",
+    "Nix",
+    "Typst",
     "Netlify",
     "Vercel",
     "npm",
@@ -159,7 +156,7 @@
 )
 
 #for (category, items) in skills [
-  #set par(leading: 0.4em) 
+  #set par(leading: 0.4em)
   - #text(weight: 700)[#category:] #items.join(", ")
 ]
 
