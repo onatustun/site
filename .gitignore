@@ -1,6 +1,6 @@
 result
+.pre-commit-config.yaml
 .direnv/
-.envrc
 public/
 static/output.css
 static/cv.pdf
