@@ -12,7 +12,7 @@
         alejandra
         gnumake
         nil
-        nodejs
+        prettier
         tailwindcss
         tailwindcss-language-server
         tinymist

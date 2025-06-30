@@ -6,6 +6,7 @@
 
     hooks = {
       alejandra.enable = true;
+      prettier.enable = true;
       typstyle.enable = true;
     };
   };

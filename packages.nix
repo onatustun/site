@@ -13,7 +13,6 @@
         dontInstall = true;
 
         nativeBuildInputs = with pkgs; [
-          nodejs
           tailwindcss
           typst
           zola

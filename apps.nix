@@ -21,18 +21,6 @@
           rm -rf target/
         ''}";
       };
-
-      purge = {
-        type = "app";
-
-        program = "${pkgs.writeShellScript "purge" ''
-          rm -rf node_modules/
-          rm -rf public/
-          rm -rf static/cv.pdf
-          rm -rf static/output.css
-          rm -rf target/
-        ''}";
-      };
     };
   };
 }

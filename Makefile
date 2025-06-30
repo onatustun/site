@@ -1,4 +1,4 @@
-.PHONY: dev build typst-install deploy clean purge
+.PHONY: dev build typst-install deploy clean
 
 dev:
 	zola serve -i 0.0.0.0 -u localhost -p 3000 &
@@ -22,6 +22,3 @@ deploy: typst-install build
 
 clean:
 	rm -rf public static/cv.pdf static/output.css target
-
-purge: clean
-	rm -rf node_modules
