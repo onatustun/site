@@ -4,5 +4,4 @@ result
 public/
 static/output.css
 static/cv.pdf
-node_modules/
 target/
