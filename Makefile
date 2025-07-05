@@ -10,6 +10,11 @@ build:
 	tailwindcss -i ./input.css -o ./static/output.css --minify
 	zola build
 
+tailwind-install:
+	@if ! command -v tailwindcss >/dev/null 2>&1; then \
+		npm install -g tailwindcss; \
+	fi	
+
 typst-install:
 	@if ! command -v typst >/dev/null 2>&1; then \
 		mkdir -p "$$HOME/.local/bin"; \
@@ -18,7 +23,7 @@ typst-install:
 		chmod +x "$$HOME/.local/bin/typst"; \
 	fi
 
-deploy: typst-install build
+deploy: typst-install tailwind-install build
 
 clean:
 	rm -rf public static/cv.pdf static/output.css target
