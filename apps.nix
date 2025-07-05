@@ -1,7 +1,7 @@
 {
   perSystem = {pkgs, ...}: {
     apps = {
-      dev = {
+      default = {
         type = "app";
 
         program = "${pkgs.writeShellScript "dev" ''
