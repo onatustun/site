@@ -2,6 +2,7 @@ result
 .pre-commit-config.yaml
 .direnv/
 public/
+node-_modules/
 static/output.css
 static/cv.pdf
 target/
