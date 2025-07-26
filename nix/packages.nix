@@ -4,11 +4,11 @@
     lib,
     ...
   }: {
-    packages.default = let
+    packages = let
       inherit (pkgs.stdenv) mkDerivation;
       inherit (lib) cleanSource;
-    in
-      mkDerivation {
+    in {
+      default = mkDerivation {
         pname = "site";
         version = "0.1.0";
         src = cleanSource inputs.self;
@@ -24,8 +24,8 @@
         buildPhase = ''
           runHook preBuild
 
-          typst compile ../src/cv.typ ../static/cv.pdf
-          tailwindcss -i ../src/input.css -o ../static/output.css --minify
+          typst compile "$PWD/src/cv.typ" "$PWD/static/cv.pdf"
+          tailwindcss -i "$PWD/src/input.css" -o "$PWD/static/output.css" --minify
           zola build --output-dir $out --force
 
           runHook postBuild
@@ -39,5 +39,19 @@
           runHook postCheck
         '';
       };
+
+      cv = mkDerivation {
+        pname = "cv";
+        version = "0.1.0";
+        src = cleanSource inputs.self;
+        dontInstall = true;
+        nativeBuildInputs = [pkgs.typst];
+
+        buildPhase = ''
+          mkdir -p $out
+          typst compile "$PWD/src/cv.typ" "$PWD/static/cv.pdf"
+        '';
+      };
+    };
   };
 }
