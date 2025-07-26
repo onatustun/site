@@ -23,8 +23,8 @@ jobs:
         uses: DeterminateSystems/nix-installer-action@main
       - name: Run the Magic Nix Cache
         uses: DeterminateSystems/magic-nix-cache-action@main
-        with:
-          flakehub-token: ${{ secrets.FLAKEHUB_TOKEN }}
+        env:
+          FLAKEHUB_TOKEN: ${{ secrets.FLAKEHUB_TOKEN }}
       - name: Build with Nix
         run: |
           nix build
