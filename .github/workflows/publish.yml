@@ -15,19 +15,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@main
+      - uses: actions/checkout@main
         with:
           submodules: recursive
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@main
-      - name: Run the Magic Nix Cache
-        uses: DeterminateSystems/magic-nix-cache-action@main
-        env:
-          FLAKEHUB_TOKEN: ${{ secrets.FLAKEHUB_TOKEN }}
+      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/magic-nix-cache-action@main
       - name: Build with Nix
-        run: |
-          nix build
+        run: nix build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@main
         with:
