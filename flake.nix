@@ -28,10 +28,10 @@
       systems = import systems;
 
       imports = [
-        ./apps.nix
-        ./dev-shell.nix
-        ./packages.nix
-        ./pre-commit-hooks.nix
+        ./nix/apps.nix
+        ./nix/packages.nix
+        ./nix/pre-commit-hooks.nix
+        ./nix/shell.nix
       ];
     };
 }

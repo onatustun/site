@@ -6,10 +6,7 @@
       check.enable = true;
 
       settings = {
-        excludes = [
-          "flake.lock"
-          "^node_modules/"
-        ];
+        excludes = ["flake.lock"];
 
         hooks = {
           alejandra = {

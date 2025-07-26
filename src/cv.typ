@@ -126,7 +126,6 @@
     "Linux",
     "Unix",
     "Nix",
-    "NixOps",
     "VPS (Hetzner Cloud)",
     "Typst",
     "Netlify",
