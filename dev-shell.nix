@@ -20,6 +20,7 @@
           typst
           typstyle
           vscode-langservers-extracted
+          yaml-language-server
           zola
         ]
         ++ (with inputs'; [
