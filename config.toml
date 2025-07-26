@@ -1,0 +1,25 @@
+base_url = "https://onatustun.github.io"
+title = "onatustun"
+description = "personal website"
+default_language = "en"
+output_dir = "public"
+compile_sass = false
+minify_html = true
+build_search_index = false
+generate_feeds = false
+
+[link_checker]
+external_level = "warn"
+
+[markdown]
+highlight_code = false
+
+[extra]
+author = "onat ustun"
+
+links = [
+  { name = "cv", path = "/cv.pdf" },
+  { name = "email", path = "mailto:o@ust.sh" },
+  { name = "github", path = "https://github.com/onatustun" },
+  { name = "x", path = "https://x.com/fshshsi" },
+]
