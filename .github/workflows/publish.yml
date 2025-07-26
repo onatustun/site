@@ -1,0 +1,80 @@
+name: Publish
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "flake.nix"
+      - "flake.lock"
+      - ".github/workflows/publish.yml"
+      - "nix/**"
+  pull_request:
+    branches: [master]
+    paths:
+      - "flake.nix"
+      - "flake.lock"
+      - ".github/workflows/publish.yml"
+      - "nix/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
+  id-token: write
+  pages: write
+  pull-requests: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Run the Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Check Flake Inputs
+        id: flakecheck
+        uses: DeterminateSystems/flake-checker-action@main
+        with:
+          fail-mode: true
+
+      - name: Update flake.lock if outdated
+        if: failure() && steps.flakecheck.outcome == 'failure'
+        uses: DeterminateSystems/update-flake-lock@main
+        with:
+          nix-options: --extra-experimental-features pipe-operators
+          commit-msg: |
+            chore: update flake.lock (auto via CI)
+          pr-title: |
+            Automated flake.lock update
+          pr-body: |
+            Flake inputs were outdated and have been updated automatically.
+
+      - name: Build Project via Flake
+        run: >
+          nix build .
+          --accept-flake-config
+          --extra-experimental-features pipe-operators
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@main
+        with:
+          path: ./result
+
+  deploy-production:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@main

@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block content %}
+<section
+  class="w-full flex flex-col gap-y-3 min-[420px]:gap-y-4 lg:gap-y-5 p-2 mb-12 max-w-[465px] aspect-[1.75/1]"
+>
+  <h1
+    class="w-min text-xl/5 min-[420px]:text-2xl/6 lg:text-3xl/7 tracking-tight text-nowrap"
+  >
+    {{ config.extra.author }}
+  </h1>
+
+  <main
+    class="flex flex-col gap-y-1 min-[420px]:gap-y-2 lg:gap-y-3 text-sm/4 min-[420px]:text-base/5 lg:text-lg/6 tracking-tight"
+  >
+    {{ section.content | safe }}
+  </main>
+
+  <nav class="w-min flex gap-x-2 min-[420px]:gap-x-3 lg:gap-x-4">
+    {% for link in config.extra.links %}
+    <a
+      class="text-sm/4 min-[420px]:text-base/5 lg:text-lg/6 tracking-wide font-medium underline underline-offset-2"
+      href="{{ link.path }}"
+    >
+      {{ link.name }}
+    </a>
+    {% endfor %}
+  </nav>
+</section>
+{% endblock content %}

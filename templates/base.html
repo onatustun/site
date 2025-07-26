@@ -1,0 +1,161 @@
+{%if section %} {% set title = section.title %} {% else %} {% set title =
+page.title %} {% endif %}
+
+<!doctype html>
+<html lang="en" class="m-0 p-0 h-dvh">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+    <title>
+      {% block title %}{{ title }}{% endblock title %} | {{ config.title }}
+    </title>
+
+    <link
+      rel="preload"
+      href="{{ get_url(path='fonts/exo-2-latin-400-normal.woff2') }}"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="{{ get_url(path='fonts/exo-2-latin-500-normal.woff2') }}"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="{{ get_url(path='favicons/apple-icon-57x57.png') }}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      href="{{ get_url(path='favicons/apple-icon-60x60.png') }}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="{{ get_url(path='favicons/apple-icon-72x72.png') }}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="{{ get_url(path='favicons/apple-icon-76x76.png') }}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="{{ get_url(path='favicons/apple-icon-114x114.png') }}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="{{ get_url(path='favicons/apple-icon-120x120.png') }}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="{{ get_url(path='favicons/apple-icon-144x144.png') }}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="{{ get_url(path='favicons/apple-icon-152x152.png') }}"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="{{ get_url(path='favicons/apple-icon-180x180.png') }}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="{{ get_url(path='favicons/android-icon-192x192.png') }}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="{{ get_url(path='favicons/favicon-32x32.png') }}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="{{ get_url(path='favicons/favicon-96x96.png') }}"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="{{ get_url(path='favicons/favicon-16x16.png') }}"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ get_url(path='favicons/favicon.ico') }}"
+    />
+
+    <link rel="manifest" href="{{ get_url(path='favicons/manifest.json') }}" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta
+      name="msapplication-TileImage"
+      content="{{ get_url(path='favicons/ms-icon-144x144.png') }}"
+    />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="preload" href="{{ get_url(path='output.css') }}" as="style" />
+    <link rel="stylesheet" href="{{ get_url(path='output.css') }}" />
+    <link rel="canonical" href="{{ config.base_url }}" />
+
+    <meta name="author" content="{{ config.extra.author }}" />
+    <meta name="description" content="{{ config.description }}" />
+    <meta name="generator" content="Zola v0.20.0" />
+    <meta name="language" content="English" />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:description" content="{{ config.description }}" />
+    <meta property="og:image" content="{{ get_url(path='images/blank.jpg')}}" />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:site_name" content="{{ config.title }}" />
+    <meta property="og:title" content="{{ title }} | {{ config.title }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ config.base_url }}" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@fshshsi" />
+    <meta name="twitter:description" content="{{ config.description }}" />
+    <meta
+      name="twitter:image"
+      content="{{ get_url(path='images/blank.jpg')}}"
+    />
+    <meta name="twitter:site" content="@fshshsi" />
+    <meta name="twitter:title" content="{{ title }} | {{ config.title }}" />
+    <meta name="twitter:url" content="{{ config.base_url }}" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "{{ config.extra.author }}",
+        "url": "{{ config.base_url }}",
+        "sameAs": [
+          "https://twitter.com/fshshsi",
+          "https://github.com/onatustun"
+        ],
+        "image": "{{ get_url(path='images/blank.jpg')}}"
+      }
+    </script>
+  </head>
+  <body
+    class="bg-background text-foreground font-sans antialised w-screen min-h-dvh overflow-x-hidden flex justify-center p-2 min-[550px]:items-center min-[550px]:p-0"
+  >
+    {% block content %} {% endblock content %}
+  </body>
+</html>

@@ -1,0 +1,24 @@
+base_url = "https://onatustun.com"
+title = "Onat Ustun"
+description = "Personal Website"
+default_language = "en"
+output_dir = "public"
+compile_sass = false
+minify_html = true
+build_search_index = false
+generate_feeds = false
+
+[link_checker]
+external_level = "warn"
+
+[markdown]
+highlight_code = false
+
+[extra]
+author = "Onat Ustun"
+
+links = [
+  { name = "Email", path = "mailto:contact@onatustun.com" },
+  { name = "Github", path = "https://github.com/onatustun" },
+  { name = "X", path = "https://x.com/fshshsi" },
+]

@@ -1,0 +1,8 @@
+result
+.pre-commit-config.yaml
+.direnv/
+!.envrc
+public/
+node_modules/
+static/output.css
+target/
