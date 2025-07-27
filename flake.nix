@@ -29,11 +29,14 @@
     ...
   }: let
     inherit (flake-parts.lib) mkFlake;
-    inherit (nixpkgs.lib) filter hasSuffix;
-    inherit (nixpkgs.lib.filesystem) listFilesRecursive;
   in
     mkFlake {inherit inputs;} {
       systems = import systems;
-      imports = filter (hasSuffix ".nix") (listFilesRecursive ./nix);
+
+      imports = let
+        inherit (nixpkgs.lib) filter hasSuffix;
+        inherit (nixpkgs.lib.filesystem) listFilesRecursive;
+      in
+        filter (hasSuffix ".nix") (listFilesRecursive ./nix);
     };
 }
