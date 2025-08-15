@@ -6,7 +6,7 @@
     ...
   }: {
     devShells.default = pkgs.mkShell {
-      name = "zola typst";
+      name = "zola";
       formatter = inputs'.alejandra.packages.default;
       shellHook = config.pre-commit.installationScript;
 
@@ -15,16 +15,14 @@
           prettier
           tailwindcss
           tailwindcss-language-server
-          tinymist
           typescript-language-server
-          typst
-          typstyle
           vscode-langservers-extracted
           yaml-language-server
           zola
         ]
         ++ (with inputs'; [
           alejandra.packages.default
+          deadnix.packages.default
         ]);
     };
   };

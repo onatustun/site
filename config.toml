@@ -1,6 +1,6 @@
 base_url = "https://onatustun.com"
-title = "onatustun"
-description = "personal website"
+title = "Onat Ustun"
+description = "Personal Website"
 default_language = "en"
 output_dir = "public"
 compile_sass = false
@@ -15,11 +15,10 @@ external_level = "warn"
 highlight_code = false
 
 [extra]
-author = "onat ustun"
+author = "Onat Ustun"
 
 links = [
-  { name = "cv", path = "/cv.pdf" },
-  { name = "email", path = "mailto:o@ust.sh" },
-  { name = "github", path = "https://github.com/onatustun" },
-  { name = "x", path = "https://x.com/fshshsi" },
+  { name = "Email", path = "mailto:o@ust.sh" },
+  { name = "Github", path = "https://github.com/onatustun" },
+  { name = "X", path = "https://x.com/fshshsi" },
 ]
