@@ -1,43 +1,41 @@
 {
-  inputs,
-  pkgs,
   lib,
+  inputs,
   ...
 }: let
-  inherit (pkgs.stdenv) mkDerivation;
   inherit (lib) cleanSource;
 in {
-  perSystem = {pkgs, ...}: {
-    packages = {
-      default = mkDerivation {
-        pname = "site";
-        version = "0.1.0";
-        src = cleanSource inputs.self;
-        doCheck = true;
-        dontInstall = true;
+  perSystem = {pkgs, ...}: let
+    inherit (pkgs.stdenv) mkDerivation;
+  in {
+    packages.default = mkDerivation {
+      pname = "site";
+      version = "0.1.0";
+      src = cleanSource inputs.self;
+      doCheck = true;
+      dontInstall = true;
 
-        nativeBuildInputs = with pkgs; [
-          tailwindcss
-          zola
-        ];
+      nativeBuildInputs = with pkgs; [
+        tailwindcss
+        zola
+      ];
 
-        buildPhase = ''
-          runHook preBuild
+      buildPhase = ''
+        runHook preBuild
 
-          tailwindcss -i "$PWD/src/input.css" -o "$PWD/static/output.css" --minify
-          zola build --output-dir $out --force
+        tailwindcss -i "$PWD/src/input.css" -o "$PWD/static/output.css" --minify
+        zola build --output-dir $out --force
 
-          runHook postBuild
-        '';
+        runHook postBuild
+      '';
 
-        checkPhase = ''
-          runHook preCheck
+      checkPhase = ''
+        runHook preCheck
 
-          zola check
+        zola check
 
-          runHook postCheck
-        '';
-      };
+        runHook postCheck
+      '';
     };
   };
 }
