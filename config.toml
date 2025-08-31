@@ -18,7 +18,7 @@ highlight_code = false
 author = "Onat Ustun"
 
 links = [
-  { name = "Email", path = "mailto:o@ust.sh" },
+  { name = "Email", path = "mailto:contact@onatustun.com" },
   { name = "Github", path = "https://github.com/onatustun" },
   { name = "X", path = "https://x.com/fshshsi" },
 ]

@@ -24,35 +24,81 @@
       "pre-commit-hooks.cachix.org-1:Pkk3Panw5AW24TOv6kz3PvLhlH8puAsJTBbOPmBo7Rc="
     ];
 
+    builders-use-substitutes = true;
+
     experimental-features = [
       "flakes"
       "nix-command"
       "pipe-operators"
     ];
 
-    builders-use-substitutes = true;
     flake-registry = "";
     show-trace = true;
   };
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    nixpkgs-lib.url = "github:nix-community/nixpkgs.lib";
+
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs-lib";
+    };
+
     systems.url = "github:nix-systems/default";
+    flake-compat.url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";
+
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
+
+    gitignore = {
+      url = "github:hercules-ci/gitignore.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     pre-commit-hooks = {
       url = "github:cachix/git-hooks.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+
+      inputs = {
+        flake-compat.follows = "flake-compat";
+        gitignore.follows = "gitignore";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
+
+    rust-analyzer-src = {
+      url = "github:rust-lang/rust-analyzer";
+      flake = false;
+    };
+
+    fenix = {
+      url = "github:nix-community/fenix";
+
+      inputs = {
+        rust-analyzer-src.follows = "rust-analyzer-src";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
 
     alejandra = {
       url = "github:kamadorueda/alejandra";
-      inputs.nixpkgs.follows = "nixpkgs";
+
+      inputs = {
+        fenix.follows = "fenix";
+        flakeCompat.follows = "flake-compat";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
 
     deadnix = {
       url = "github:astro/deadnix";
-      inputs.nixpkgs.follows = "nixpkgs";
+
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        utils.follows = "flake-utils";
+      };
     };
   };
 
