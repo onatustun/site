@@ -7,7 +7,11 @@
 
       settings = {
         package = inputs'.pre-commit-hooks.packages.default;
-        excludes = ["flake.lock"];
+
+        excludes = [
+          "\\.envrc$"
+          "flake\\.lock$"
+        ];
 
         hooks = {
           alejandra = {
@@ -21,6 +25,7 @@
           };
 
           prettier.enable = true;
+          treefmt.enable = true;
         };
       };
     };

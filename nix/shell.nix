@@ -7,7 +7,6 @@
   }: {
     devShells.default = pkgs.mkShell {
       name = "zola";
-      formatter = inputs'.alejandra.packages.default;
       shellHook = config.pre-commit.installationScript;
 
       packages = with pkgs;
