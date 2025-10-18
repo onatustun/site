@@ -3,18 +3,8 @@ name: Publish
 on:
   push:
     branches: [master]
-    paths:
-      - "flake.nix"
-      - "flake.lock"
-      - ".github/workflows/publish.yml"
-      - "nix/**"
   pull_request:
     branches: [master]
-    paths:
-      - "flake.nix"
-      - "flake.lock"
-      - ".github/workflows/publish.yml"
-      - "nix/**"
   workflow_dispatch:
 
 permissions:
@@ -37,6 +27,12 @@ jobs:
 
       - name: Run the Magic Nix Cache
         uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Check Flake
+        run: >
+          nix flake check
+          --accept-flake-config
+          --extra-experimental-features pipe-operators
 
       - name: Check Flake Inputs
         id: flakecheck

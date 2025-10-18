@@ -1,5 +1,5 @@
 {
-  description = "zola environment";
+  description = "site";
 
   nixConfig = {
     extra-substituters = [

@@ -1,6 +1,6 @@
 base_url = "https://onatustun.com"
 title = "Onat Ustun"
-description = "Personal Website"
+description = "Computer enthusiast exploring functional programming."
 default_language = "en"
 output_dir = "public"
 compile_sass = false
