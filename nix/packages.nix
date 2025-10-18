@@ -1,10 +1,16 @@
 {
   lib,
+  self,
   inputs,
   ...
 }: let
-  inherit (lib) importTOML const;
+  inherit (lib) importTOML substring const;
   zolaConfig = importTOML ../config.toml;
+
+  versionRev =
+    if self ? rev
+    then substring 0 8 self.rev
+    else "dirty";
 in {
   perSystem = {
     self',
@@ -23,7 +29,7 @@ in {
 
       site = pkgs.stdenv.mkDerivation {
         pname = "site";
-        version = "0.0.1";
+        version = "${versionRev}-flake";
         src = pkgs.gitignoreSource ./..;
         doCheck = true;
 
@@ -60,7 +66,6 @@ in {
         meta = {
           description = zolaConfig.description;
           homepage = zolaConfig.base_url;
-          license = lib.licenses.mit;
           maintainers = with lib.maintainers; [onatustun];
         };
       };
