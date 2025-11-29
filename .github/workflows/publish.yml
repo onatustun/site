@@ -41,7 +41,6 @@ jobs:
         if: failure() && steps.flakecheck.outcome == 'failure'
         uses: DeterminateSystems/update-flake-lock@main
         with:
-          nix-options: --extra-experimental-features pipe-operators
           commit-msg: |
             chore: update flake.lock (auto via CI)
           pr-title: |

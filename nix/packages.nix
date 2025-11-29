@@ -4,13 +4,10 @@
   inputs,
   ...
 }: let
-  version = "${
-    if self ? rev
-    then lib.strings.substring 0 8 self.rev
-    else "dirty"
-  }-flake";
-
+  version = "${self.shortRev or "dirty"}-flake";
   zolaConfig = lib.trivial.importTOML ../config.toml;
+  basePath = ./..;
+  pname = "site";
 in {
   perSystem = {
     system,
@@ -27,9 +24,25 @@ in {
       default = self'.packages.site;
 
       site = pkgs.stdenv.mkDerivation {
-        pname = "site";
-        inherit version;
-        src = pkgs.gitignoreSource ./..;
+        inherit pname version;
+
+        src = lib.sources.cleanSourceWith {
+          src = basePath;
+          name = pname + "-source";
+
+          filter = pkgs.gitignoreFilterWith {
+            inherit basePath;
+
+            extraRules = ''
+              flake.lock
+              flake.nix
+              .github/
+              nix/
+              result/
+            '';
+          };
+        };
+
         doCheck = true;
 
         nativeBuildInputs = [
@@ -49,6 +62,7 @@ in {
         installPhase = ''
           runHook preInstall
 
+          ${lib.meta.getExe' pkgs.coreutils "mkdir"} -p $out
           ${lib.meta.getExe' pkgs.coreutils "cp"} -r public $out
 
           runHook postInstall
