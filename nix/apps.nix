@@ -2,20 +2,18 @@
   perSystem = {
     self',
     pkgs,
+    lib,
     ...
-  }: let
-    inherit (pkgs) writeShellScript;
-  in {
+  }: {
     apps = {
       default = self'.apps.site;
 
       site = {
         type = "app";
 
-        program = "${writeShellScript "site" ''
-          zola serve -i 0.0.0.0 -u localhost -p 3000 &
-          tailwindcss -i src/input.css -o static/output.css --watch
-          wait
+        program = "${pkgs.writers.writeNu "site" ''
+          job spawn { ${lib.meta.getExe pkgs.zola} serve -i 0.0.0.0 -u localhost -p 3000 }
+          ${lib.meta.getExe pkgs.tailwindcss} -i src/input.css -o static/output.css --watch
         ''}";
 
         meta.description = "Development port and file watching";
@@ -24,8 +22,8 @@
       clean = {
         type = "app";
 
-        program = "${writeShellScript "clean" ''
-          rm -rf public static/output.css target
+        program = "${pkgs.writers.writeNu "clean" ''
+          ${lib.meta.getExe' pkgs.coreutils "rm"} -rf public static/output.css target
         ''}";
 
         meta.description = "Remove build artifacts";

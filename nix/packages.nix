@@ -1,22 +1,21 @@
 {
-  lib,
   self,
+  lib,
   inputs,
   ...
 }: let
-  inherit (lib) importTOML substring const;
-  zolaConfig = importTOML ../config.toml;
-
-  versionRev =
+  version = "${
     if self ? rev
-    then substring 0 8 self.rev
-    else "dirty";
+    then lib.strings.substring 0 8 self.rev
+    else "dirty"
+  }-flake";
+
+  zolaConfig = lib.trivial.importTOML ../config.toml;
 in {
   perSystem = {
-    self',
     system,
+    self',
     pkgs,
-    inputs',
     ...
   }: {
     _module.args.pkgs = import inputs.nixpkgs {
@@ -29,20 +28,20 @@ in {
 
       site = pkgs.stdenv.mkDerivation {
         pname = "site";
-        version = "${versionRev}-flake";
+        inherit version;
         src = pkgs.gitignoreSource ./..;
         doCheck = true;
 
-        nativeBuildInputs = with pkgs; [
-          tailwindcss
-          zola
+        nativeBuildInputs = [
+          pkgs.tailwindcss
+          pkgs.zola
         ];
 
         buildPhase = ''
           runHook preBuild
 
-          tailwindcss -i "$PWD/src/input.css" -o "$PWD/static/output.css" --minify
-          zola build --output-dir public --force
+          ${lib.meta.getExe pkgs.tailwindcss} -i "$PWD/src/input.css" -o "$PWD/static/output.css" --minify
+          ${lib.meta.getExe pkgs.zola} build --output-dir public --force
 
           runHook postBuild
         '';
@@ -50,7 +49,7 @@ in {
         installPhase = ''
           runHook preInstall
 
-          cp -r public $out
+          ${lib.meta.getExe' pkgs.coreutils "cp"} -r public $out
 
           runHook postInstall
         '';
@@ -58,21 +57,17 @@ in {
         checkPhase = ''
           runHook preCheck
 
-          zola check
+          ${lib.meta.getExe pkgs.zola} check
 
           runHook postCheck
         '';
 
         meta = {
-          description = zolaConfig.description;
+          inherit (zolaConfig) description;
           homepage = zolaConfig.base_url;
-          maintainers = with lib.maintainers; [onatustun];
+          maintainers = [lib.maintainers.onatustun];
         };
       };
-
-      deadnix =
-        inputs'.deadnix.packages.default.overrideAttrs
-        <| const {meta.mainProgram = "deadnix";};
     };
   };
 }

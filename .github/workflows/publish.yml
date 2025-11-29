@@ -6,8 +6,6 @@ on:
   pull_request:
     branches: [master]
   workflow_dispatch:
-  schedule:
-    - cron: "0 0 */29 * *"
 
 permissions:
   contents: read
@@ -31,66 +29,33 @@ jobs:
         uses: DeterminateSystems/magic-nix-cache-action@main
 
       - name: Check Flake
-        run: >
-          nix flake check
-          --accept-flake-config
-          --extra-experimental-features pipe-operators
+        run: nix flake check
 
       - name: Check Flake Inputs
         id: flakecheck
         uses: DeterminateSystems/flake-checker-action@main
         with:
           fail-mode: true
-        continue-on-error: true
 
       - name: Update flake.lock if outdated
-        id: update-lock
-        if: steps.flakecheck.outcome == 'failure'
-        run: >
-          nix flake update
-          --accept-flake-config
-          --extra-experimental-features pipe-operators
-
-      - name: Detect flake.lock changes
-        id: detect-changes
-        if: steps.update-lock.outcome == 'success'
-        run: |
-          if git diff --quiet flake.lock; then
-            echo "updated=false" >> $GITHUB_OUTPUT
-          else
-            echo "updated=true" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Check Flake (after update)
-        if: steps.detect-changes.outputs.updated == 'true'
-        run: >
-          nix flake check
-          --accept-flake-config
-          --extra-experimental-features pipe-operators
+        if: failure() && steps.flakecheck.outcome == 'failure'
+        uses: DeterminateSystems/update-flake-lock@main
+        with:
+          nix-options: --extra-experimental-features pipe-operators
+          commit-msg: |
+            chore: update flake.lock (auto via CI)
+          pr-title: |
+            Automated flake.lock update
+          pr-body: |
+            Flake inputs were outdated and have been updated automatically.
 
       - name: Build Project via Flake
-        run: >
-          nix build .
-          --accept-flake-config
-          --extra-experimental-features pipe-operators
+        run: nix build .
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@main
         with:
           path: ./result
-
-      - name: Create PR for updated flake.lock
-        if: steps.detect-changes.outputs.updated == 'true' && success() && github.ref == 'refs/heads/master'
-        uses: peter-evans/create-pull-request@v5
-        with:
-          commit-message: |
-            chore: update flake.lock (auto via CI)
-          title: |
-            Automated flake.lock update
-          body: |
-            Flake inputs were outdated and have been updated automatically.
-          branch: |
-            automated/flake-lock-update
 
   deploy-production:
     environment:
