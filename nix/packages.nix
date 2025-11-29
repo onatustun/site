@@ -4,7 +4,7 @@
   inputs,
   ...
 }: let
-  version = "${self.shortRev or "dirty"}-flake";
+  version = "${self.shortRev or "dirty"}-${self._type}";
   zolaConfig = lib.trivial.importTOML ../config.toml;
   basePath = ./..;
   pname = "site";
@@ -46,6 +46,7 @@ in {
         doCheck = true;
 
         nativeBuildInputs = [
+          pkgs.coreutils
           pkgs.tailwindcss
           pkgs.zola
         ];
@@ -62,7 +63,6 @@ in {
         installPhase = ''
           runHook preInstall
 
-          ${lib.meta.getExe' pkgs.coreutils "mkdir"} -p $out
           ${lib.meta.getExe' pkgs.coreutils "cp"} -r public $out
 
           runHook postInstall

@@ -19,6 +19,7 @@
         ];
 
         packages = [
+          pkgs.coreutils
           pkgs.tailwindcss
           pkgs.zola
         ];
