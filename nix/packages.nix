@@ -1,10 +1,9 @@
 {
-  self,
   lib,
+  self,
   inputs,
   ...
 }: let
-  version = "${self.shortRev or "dirty"}-${self._type}";
   zolaConfig = lib.trivial.importTOML ../config.toml;
   basePath = ./..;
   pname = "site";
@@ -18,7 +17,8 @@ in {
       default = self'.packages.site;
 
       site = pkgs.stdenv.mkDerivation {
-        inherit pname version;
+        inherit pname;
+        version = "${self.shortRev or "dirty"}-${self._type}";
 
         src = lib.sources.cleanSourceWith {
           src = basePath;

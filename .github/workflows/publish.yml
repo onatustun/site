@@ -29,7 +29,7 @@ jobs:
         uses: DeterminateSystems/magic-nix-cache-action@main
 
       - name: Check Flake
-        run: nix flake check
+        run: nix flake check --accept-flake-config
 
       - name: Check Flake Inputs
         id: flakecheck
@@ -41,6 +41,7 @@ jobs:
         if: failure() && steps.flakecheck.outcome == 'failure'
         uses: DeterminateSystems/update-flake-lock@main
         with:
+          nix-options: --accept-flake-config
           commit-msg: |
             chore: update flake.lock (auto via CI)
           pr-title: |
@@ -49,7 +50,7 @@ jobs:
             Flake inputs were outdated and have been updated automatically.
 
       - name: Build Project via Flake
-        run: nix build .
+        run: nix build . --accept-flake-config
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@main

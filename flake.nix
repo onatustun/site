@@ -1,7 +1,15 @@
 {
+  description = "Personal site";
+
   outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;}
     (inputs.import-tree ./nix);
+
+  nixConfig = {
+    extra-substituters = ["https://nix-community.cachix.org"];
+    extra-trusted-public-keys = ["nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="];
+    extra-experimental-features = "nix-command flakes";
+  };
 
   inputs = {
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
