@@ -17,12 +17,6 @@
           config.treefmt.build.devShell
           self'.packages.site
         ];
-
-        packages = [
-          pkgs.coreutils
-          pkgs.tailwindcss
-          pkgs.zola
-        ];
       };
     };
   };

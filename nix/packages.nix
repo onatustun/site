@@ -10,16 +10,10 @@
   pname = "site";
 in {
   perSystem = {
-    system,
     self',
     pkgs,
     ...
   }: {
-    _module.args.pkgs = import inputs.nixpkgs {
-      inherit system;
-      overlays = [inputs.gitignore.overlay];
-    };
-
     packages = {
       default = self'.packages.site;
 
@@ -30,7 +24,7 @@ in {
           src = basePath;
           name = pname + "-source";
 
-          filter = pkgs.gitignoreFilterWith {
+          filter = inputs.gitignore.lib.gitignoreFilterWith {
             inherit basePath;
 
             extraRules = ''
