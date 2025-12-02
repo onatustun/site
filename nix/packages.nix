@@ -18,7 +18,7 @@ in {
 
       site = pkgs.stdenv.mkDerivation {
         inherit pname;
-        version = "${self.shortRev or "dirty"}-${self._type}";
+        version = "${self.shortRev or self.dirtyShortRev}-${self._type}";
 
         src = lib.sources.cleanSourceWith {
           src = basePath;
