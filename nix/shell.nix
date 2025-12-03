@@ -8,7 +8,7 @@
     devShells = {
       default = self'.devShells.site;
 
-      site = pkgs.mkShell {
+      site = pkgs.mkShellNoCC {
         name = "site-dev";
         shellHook = config.pre-commit.installationScript;
 
