@@ -11,6 +11,7 @@ in {
   perSystem = {
     self',
     pkgs,
+    lib,
     ...
   }: {
     packages = {
@@ -28,10 +29,12 @@ in {
             inherit basePath;
 
             extraRules = ''
+              dev-flake/
               flake.lock
               flake.nix
               .github/
               nix/
+              outputs.nix
               result/
             '';
           };
@@ -40,34 +43,21 @@ in {
         doCheck = true;
 
         nativeBuildInputs = [
-          pkgs.coreutils
           pkgs.tailwindcss
           pkgs.zola
         ];
 
         buildPhase = ''
-          runHook preBuild
-
           ${lib.meta.getExe pkgs.tailwindcss} -i "$PWD/src/input.css" -o "$PWD/static/output.css" --minify
           ${lib.meta.getExe pkgs.zola} build --output-dir public --force
-
-          runHook postBuild
         '';
 
         installPhase = ''
-          runHook preInstall
-
-          ${lib.meta.getExe' pkgs.coreutils "cp"} -r public $out
-
-          runHook postInstall
+          cp -r public $out
         '';
 
         checkPhase = ''
-          runHook preCheck
-
           ${lib.meta.getExe pkgs.zola} check
-
-          runHook postCheck
         '';
 
         meta = {
@@ -77,5 +67,42 @@ in {
         };
       };
     };
+  };
+
+  partitions.dev.module.perSystem = {
+    self',
+    pkgs,
+    lib,
+    ...
+  }: {
+    apps = {
+      default = self'.apps.site;
+
+      site = {
+        type = "app";
+        meta.description = "Development port and file watching";
+
+        program = lib.meta.getExe' (pkgs.writers.writeNu "site" ''
+          job spawn { ${lib.meta.getExe pkgs.zola} serve -i 0.0.0.0 -u localhost -p 3000 }
+          ${lib.meta.getExe pkgs.tailwindcss} -i src/input.css -o static/output.css --watch
+        '') "site";
+      };
+
+      clean = {
+        type = "app";
+        meta.description = "Remove build artifacts";
+
+        program = lib.meta.getExe' (pkgs.writers.writeNu "clean" ''
+          rm -rf public static/output.css target
+        '') "clean";
+      };
+    };
+
+    checks = {
+      default = self'.checks.site;
+      inherit (self'.packages) site;
+    };
+
+    make-shells.site.inputsFrom = [self'.packages.site];
   };
 }
