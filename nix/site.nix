@@ -1,12 +1,11 @@
 {
   lib,
   self,
-  inputs,
   ...
 }: let
-  zolaConfig = lib.trivial.importTOML ../config.toml;
-  basePath = ./..;
   pname = "site";
+  root = ./..;
+  zolaConfig = lib.trivial.importTOML ../config.toml;
 in {
   perSystem = {
     self',
@@ -21,23 +20,19 @@ in {
         inherit pname;
         version = "${self.shortRev or self.dirtyShortRev}-${self._type}";
 
-        src = lib.sources.cleanSourceWith {
-          src = basePath;
-          name = pname + "-source";
+        src = lib.fileset.toSource {
+          inherit root;
 
-          filter = inputs.gitignore.lib.gitignoreFilterWith {
-            inherit basePath;
-
-            extraRules = ''
-              dev-flake/
-              flake.lock
-              flake.nix
-              .github/
-              nix/
-              outputs.nix
-              result/
-            '';
-          };
+          fileset =
+            lib.fileset.intersection (lib.fileset.gitTracked root)
+            (lib.fileset.unions [
+              (root + "/config.toml")
+              (root + "/content")
+              (root + "/src")
+              (root + "/static")
+              (root + "/tailwind.config.js")
+              (root + "/templates")
+            ]);
         };
 
         doCheck = true;
@@ -48,8 +43,8 @@ in {
         ];
 
         buildPhase = ''
-          ${lib.meta.getExe pkgs.tailwindcss} -i "$PWD/src/input.css" -o "$PWD/static/output.css" --minify
-          ${lib.meta.getExe pkgs.zola} build --output-dir public --force
+          tailwindcss -i "$PWD/src/input.css" -o "$PWD/static/output.css" --minify
+          zola build --output-dir public --force
         '';
 
         installPhase = ''
@@ -57,7 +52,7 @@ in {
         '';
 
         checkPhase = ''
-          ${lib.meta.getExe pkgs.zola} check
+          zola check
         '';
 
         meta = {
@@ -82,19 +77,19 @@ in {
         type = "app";
         meta.description = "Development port and file watching";
 
-        program = lib.meta.getExe' (pkgs.writers.writeNu "site" ''
+        program = toString (pkgs.writers.writeNu "site" ''
           job spawn { ${lib.meta.getExe pkgs.zola} serve -i 0.0.0.0 -u localhost -p 3000 }
           ${lib.meta.getExe pkgs.tailwindcss} -i src/input.css -o static/output.css --watch
-        '') "site";
+        '');
       };
 
       clean = {
         type = "app";
         meta.description = "Remove build artifacts";
 
-        program = lib.meta.getExe' (pkgs.writers.writeNu "clean" ''
+        program = toString (pkgs.writers.writeNu "clean" ''
           rm -rf public static/output.css target
-        '') "clean";
+        '');
       };
     };
 

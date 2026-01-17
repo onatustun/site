@@ -22,11 +22,6 @@
 
     systems.url = "github:nix-systems/default";
     import-tree.url = "github:vic/import-tree";
-
-    gitignore = {
-      url = "github:hercules-ci/gitignore.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = inputs: import ./outputs.nix inputs;

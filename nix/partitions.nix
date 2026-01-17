@@ -8,7 +8,9 @@
   partitionedAttrs = lib.attrsets.genAttrs [
     "apps"
     "checks"
+    "devShells"
+    "formatter"
   ] (lib.trivial.const "dev");
 
-  partitions.dev.extraInputsFlake = ../dev-flake;
+  partitions.dev.extraInputsFlake = ./_dev-flake;
 }

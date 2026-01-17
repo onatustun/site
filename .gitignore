@@ -38,9 +38,6 @@ static/output.css
 !nix/
 !nix/**/
 
-!dev-flake/
-!dev-flake/**/
-
 !src/
 !src/**/
 
