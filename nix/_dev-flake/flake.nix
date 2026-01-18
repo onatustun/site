@@ -10,14 +10,14 @@
 
       inputs = {
         flake-compat.follows = "dep_flake-compat";
-        gitignore.follows = "de_gitignore";
-        nixpkgs.follows = "de_nixpkgs";
+        gitignore.follows = "dep_gitignore";
+        nixpkgs.follows = "dep_nixpkgs";
       };
     };
 
     treefmt-nix = {
       url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "de_nixpkgs";
+      inputs.nixpkgs.follows = "dep_nixpkgs";
     };
 
     dep_flake-compat = {
@@ -25,12 +25,12 @@
       flake = false;
     };
 
-    de_gitignore = {
+    dep_gitignore = {
       url = "github:hercules-ci/gitignore.nix";
-      inputs.nixpkgs.follows = "de_nixpkgs";
+      inputs.nixpkgs.follows = "dep_nixpkgs";
     };
 
-    de_nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+    dep_nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
   };
 
   outputs = _: {};

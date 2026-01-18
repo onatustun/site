@@ -1,4 +1,6 @@
 {
+  partitionedAttrs.formatter = "dev";
+
   partitions.dev.module = {inputs, ...}: {
     imports = [inputs.treefmt-nix.flakeModule];
 

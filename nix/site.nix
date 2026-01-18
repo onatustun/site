@@ -1,23 +1,18 @@
-{
-  lib,
-  self,
-  ...
-}: let
-  pname = "site";
-  root = ./..;
-  zolaConfig = lib.trivial.importTOML ../config.toml;
-in {
+{self, ...}: {
   perSystem = {
+    lib,
     self',
     pkgs,
-    lib,
     ...
-  }: {
+  }: let
+    root = ./..;
+    zolaConfig = lib.trivial.importTOML (root + /config.toml);
+  in {
     packages = {
       default = self'.packages.site;
 
       site = pkgs.stdenv.mkDerivation {
-        inherit pname;
+        pname = "site";
         version = "${self.shortRev or self.dirtyShortRev}-${self._type}";
 
         src = lib.fileset.toSource {
@@ -64,6 +59,8 @@ in {
     };
   };
 
+  partitionedAttrs.apps = "dev";
+
   partitions.dev.module.perSystem = {
     self',
     pkgs,
@@ -98,6 +95,7 @@ in {
       inherit (self'.packages) site;
     };
 
+    devShells.default = self'.devShells.site;
     make-shells.site.inputsFrom = [self'.packages.site];
   };
 }
